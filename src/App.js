@@ -3,17 +3,20 @@ import { useState, useEffect } from "react";
 // hooks can only be used inside React fxns, not class components
 // hooks must always be called at the top level of the component
 
+function ExampleChild() {
+  useEffect(() => {
+    console.log("Subscribing...");
+
+    return () => {
+      console.log("Unsubscribing...");
+    };
+  }, []);
+  return <h2>I am the example child</h2>;
+}
+
 function App() {
   const [color, setColor] = useState("red");
-  const [msg, setMsg] = useState("initial message");
-
-  useEffect(() => {
-    console.log(msg);
-  }, [msg, color]);
-
-  useEffect(() => {
-    console.log("mount");
-  }, []);
+  const [msg, setMsg] = useState("Initial Message");
 
   function changeColor() {
     // setColor("blue");
@@ -30,6 +33,7 @@ function App() {
       <h1>{msg}</h1>
       <button onClick={changeColor}>Click Me</button>
       <button onClick={changeMsg}>Click Me</button>
+      {msg === "Initial Message" && <ExampleChild />}
     </>
   );
 }
