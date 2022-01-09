@@ -1,36 +1,26 @@
-import { Component } from "react";
+import { useState } from "react";
 
 // hooks can only be used inside React fxns, not class components
 // hooks must always be called at the top level of the component
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      color: "red",
-      msg: "",
-    };
-    this.handleClick = this.handleClick.bind(this);
-  }
+function App() {
+  const [color, setColor] = useState("red");
+  const [msg, setMsg] = useState("");
 
-  handleClick() {
+  function handleClick() {
     // setColor("blue");
-    this.state.color === "red"
-      ? this.setState({ color: "blue" })
-      : this.setState({ color: "red" });
+    color === "red" ? setColor("blue") : setColor("red");
 
-    this.setState({ msg: "Super Secret Message" });
+    setMsg("Super Secret Message");
   }
 
-  render() {
-    return (
-      <>
-        <h1 style={{ background: this.state.color }}>React Hooks Demo</h1>
-        <h1>{this.state.msg}</h1>
-        <button onClick={this.handleClick}>Click Me</button>
-      </>
-    );
-  }
+  return (
+    <>
+      <h1 style={{ background: color }}>React Hooks Demo</h1>
+      <h1>{msg}</h1>
+      <button onClick={handleClick}>Click Me</button>
+    </>
+  );
 }
 
 export default App;
